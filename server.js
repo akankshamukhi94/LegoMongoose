@@ -8,7 +8,7 @@
 * 
 * Name: _____________Akanksha_________ Student ID: _____155514227_________ Date: ___30-09-24___________
 *
-* Published URL: https://legos-db.vercel.app/
+* Published URL: https://lego-mongoose.vercel.app/
 *
 ********************************************************************************/
 require('pg'); // explicitly require the "pg" module
