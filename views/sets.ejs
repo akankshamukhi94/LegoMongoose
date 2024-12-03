@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEGO Set Website - Collection</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="min-h-screen bg-black">
+    <%- include('partials/navbar', { page: "/lego/sets" }) %>
+
+    <div class="container mx-auto p-4 md:p-8">
+        <!-- Header Section -->
+        <div class="border-4 border-red-600 bg-zinc-900 p-4 md:p-8 mb-4 md:mb-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-mono font-black text-white mb-4 md:mb-6">Collection</h1>
+                <p class="text-lg md:text-xl font-mono text-gray-300 mb-6 md:mb-8">Explore our collection of LEGO sets!</p>
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+                    <a href="/lego/sets?theme=icons" 
+                       class="font-mono font-bold px-3 md:px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-700 transition-colors border-2 border-red-600">Icons</a>
+                    <a href="/lego/sets?theme=supplemental" 
+                       class="font-mono font-bold px-3 md:px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-700 transition-colors border-2 border-red-600">Supplemental</a>
+                    <a href="/lego/sets?theme=Duplo%20and%20Explore" 
+                       class="font-mono font-bold px-3 md:px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-700 transition-colors border-2 border-red-600">Duplo and Explorer</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Card View -->
+        <div class="md:hidden space-y-4">
+            <% sets.forEach(set => { %>
+                <div class="border-4 border-red-600 bg-zinc-900 p-4">
+                    <div class="flex items-center space-x-4">
+                        <img src="<%= set.img_url %>" 
+                             alt="<%= set.name %>"
+                             loading="lazy"
+                             class="h-20 w-20 object-cover border-2 border-red-600">
+                        <div>
+                            <h2 class="font-mono font-bold text-white mb-1"><%= set.name %></h2>
+                            <p class="font-mono text-red-500"><%= set.theme.name %></p>
+                            <p class="font-mono text-gray-300">Year: <%= set.year %> | Parts: <%= set.num_parts %></p>
+                            <a href="/lego/sets/<%= set.set_num %>" 
+                               class="font-mono font-bold mt-2 px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-700 transition-colors border-2 border-red-600 inline-block">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+
+        <!-- Desktop Table View -->
+        <div class="hidden md:block border-4 border-red-600 bg-zinc-900 overflow-x-auto">
+            <table class="w-full">
+                <thead class="border-b-4 border-red-600">
+                    <tr class="text-left">
+                        <th class="p-4 font-mono text-white">Image</th>
+                        <th class="p-4 font-mono text-white">Name</th>
+                        <th class="p-4 font-mono text-white">Theme</th>
+                        <th class="p-4 font-mono text-white">Year</th>
+                        <th class="p-4 font-mono text-white">Parts</th>
+                        <th class="p-4 font-mono text-white">Details</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-red-600">
+                    <% sets.forEach(set => { %>
+                        <tr class="hover:bg-zinc-800 transition-colors">
+                            <td class="p-4">
+                                <img src="<%= set.img_url %>" 
+                                     alt="<%= set.name %>"
+                                     loading="lazy"
+                                     class="h-16 w-16 object-cover border-2 border-red-600">
+                            </td>
+                            <td class="p-4">
+                                <div class="font-mono font-bold text-white"><%= set.name %></div>
+                            </td>
+                            <td class="p-4">
+                                <a href="/lego/sets?theme=<%= set.theme.name %>" 
+                                   class="font-mono text-red-500 hover:text-red-400"><%= set.theme.name %></a>
+                            </td>
+                            <td class="p-4 font-mono text-gray-300"><%= set.year %></td>
+                            <td class="p-4 font-mono text-gray-300"><%= set.num_parts %></td>
+                            <td class="p-4">
+                                <a href="/lego/sets/<%= set.set_num %>" 
+                                   class="font-mono font-bold px-4 py-2 bg-zinc-800 text-white hover:bg-zinc-700 transition-colors border-2 border-red-600">
+                                    Details
+                                </a>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

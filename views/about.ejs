@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css">
+
+    <title>Lego Collection | About</title>
+</head>
+
+<body class="min-h-screen bg-black">
+    <%- include('partials/navbar', {page: '/about'}) %>      
+    
+    <div class="container mx-auto p-8">
+        <div class="border-4 border-red-600 bg-zinc-900 p-8 mb-12">
+            <div class="text-center">
+                <h1 class="text-6xl font-mono font-black text-white mb-6">About</h1>
+                <p class="text-xl font-mono text-gray-300">Welcome to my digital space</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+            <div class="border-4 border-red-600 bg-zinc-900 p-6">
+                <div class="overflow-hidden">
+                    <img class="w-full h-auto object-cover hover:opacity-90 transition-opacity border-2 border-red-600" 
+                         src="https://thumbs.dreamstime.com/b/cartoon-character-woman-long-brown-hair-holding-tablet-d-style-design-isolated-329870712.jpg" 
+                         alt="A representation of me">
+                </div>
+            </div>
+
+            <div class="border-4 border-red-600 bg-zinc-900 p-8">
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-mono font-bold text-white mb-4">Hello, I'm Akanksha</h2>
+                    <p class="text-lg font-mono text-gray-300 leading-relaxed">
+                        Currently pursuing Computer Programming at Seneca Polytechnic, I'm passionate about coding and continuous learning.
+                    </p>
+                    <p class="text-lg font-mono text-gray-300 leading-relaxed">
+                        My work experience at a clothing store and Love Me Sweet cheesecake bakery has shaped my professional growth.
+                    </p>
+                    <p class="text-lg font-mono text-gray-300 leading-relaxed">
+                        I have a deep appreciation for Indian cuisine and cherish quality time with family and friends.
+                    </p>
+                    <p class="text-lg font-mono text-gray-300 leading-relaxed">
+                        Currently focusing on:
+                    </p>
+                    <ul class="list-none space-y-2">
+                        <li class="border-2 border-red-600 bg-zinc-800 p-3 text-white font-mono hover:bg-zinc-700 transition-colors">
+                            🔹 PL/SQL & Databases
+                        </li>
+                        <li class="border-2 border-red-600 bg-zinc-800 p-3 text-white font-mono hover:bg-zinc-700 transition-colors">
+                            🔹 Web Programming
+                        </li>
+                        <li class="border-2 border-red-600 bg-zinc-800 p-3 text-white font-mono hover:bg-zinc-700 transition-colors">
+                            🔹 Software Development
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

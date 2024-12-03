@@ -1,0 +1,118 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+<nav class="fixed top-0 left-0 w-full bg-zinc-900 shadow-lg border-b-4 border-red-600 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+        <!-- Brand -->
+        <a href="/" class="flex items-center text-2xl font-mono font-bold text-white hover:text-red-500 transition duration-300">
+            <i class="fa-solid fa-cube mr-2"></i>
+            LEGO Collection
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center space-x-6">
+            <!-- View Collection -->
+            <a href="/lego/sets" class="flex items-center font-mono text-white hover:text-red-500 transition duration-300">
+                <i class="fa-solid fa-boxes-stacked mr-2"></i>
+                <span class="hidden md:inline">View Collection</span>
+            </a>
+            <!-- About -->
+            <a href="/about" class="flex items-center font-mono text-white hover:text-red-500 transition duration-300">
+                <i class="fa-solid fa-circle-info mr-2"></i>
+                <span class="hidden md:inline">About</span>
+            </a>
+
+            <% if (session.user) { %>
+                <!-- Account Dropdown -->
+                <div class="relative">
+                    <button id="desktop-account-btn" class="flex items-center text-white hover:text-red-500">
+                        <i class="fa-solid fa-user mr-2"></i>
+                        <span class="hidden md:inline"><%= session.user.userName %></span>
+                        <i class="fa-solid fa-chevron-down ml-2"></i>
+                    </button>
+                    <ul id="desktop-account-menu" class="hidden absolute right-0 mt-2 w-40 bg-zinc-800 border border-red-600 rounded-md shadow-md">
+                        <li><a href="/lego/addSet" class="flex items-center px-4 py-2 text-white hover:text-red-500"><i class="fa-solid fa-plus mr-2"></i>Add Set</a></li>
+                        <li><a href="/userHistory" class="flex items-center px-4 py-2 text-white hover:text-red-500"><i class="fa-solid fa-clock-rotate-left mr-2"></i>History</a></li>
+                        <li><a href="/logout" class="flex items-center px-4 py-2 text-white hover:text-red-500"><i class="fa-solid fa-right-from-bracket mr-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            <% } else { %>
+                <!-- Login/Register Dropdown -->
+                <div class="relative">
+                    <button id="desktop-account-btn" class="flex items-center text-white hover:text-red-500">
+                        <i class="fa-solid fa-user mr-2"></i>
+                        <span class="hidden md:inline">Account</span>
+                        <i class="fa-solid fa-chevron-down ml-2"></i>
+                    </button>
+                    <ul id="desktop-account-menu" class="hidden absolute right-0 mt-2 w-40 bg-zinc-800 border border-red-600 rounded-md shadow-md">
+                        <li><a href="/login" class="flex items-center px-4 py-2 text-white hover:text-red-500"><i class="fa-solid fa-right-to-bracket mr-2"></i>Login</a></li>
+                        <li><a href="/register" class="flex items-center px-4 py-2 text-white hover:text-red-500"><i class="fa-solid fa-user-plus mr-2"></i>Register</a></li>
+                    </ul>
+                </div>
+            <% } %>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-toggle" class="lg:hidden text-white" aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-zinc-900 border-t-2 border-red-600">
+        <div class="flex flex-col space-y-2 py-4">
+            <a href="/lego/sets" class="flex items-center px-4 text-white hover:text-red-500">
+                <i class="fa-solid fa-boxes-stacked mr-2"></i> View Collection
+            </a>
+            <a href="/about" class="flex items-center px-4 text-white hover:text-red-500">
+                <i class="fa-solid fa-circle-info mr-2"></i> About
+            </a>
+
+            <% if (session.user) { %>
+                <a href="/lego/addSet" class="flex items-center px-4 text-white hover:text-red-500">
+                    <i class="fa-solid fa-plus mr-2"></i> Add Set
+                </a>
+                <a href="/userHistory" class="flex items-center px-4 text-white hover:text-red-500">
+                    <i class="fa-solid fa-clock-rotate-left mr-2"></i> History
+                </a>
+                <a href="/logout" class="flex items-center px-4 text-white hover:text-red-500">
+                    <i class="fa-solid fa-right-from-bracket mr-2"></i> Logout
+                </a>
+            <% } else { %>
+                <a href="/login" class="flex items-center px-4 text-white hover:text-red-500">
+                    <i class="fa-solid fa-right-to-bracket mr-2"></i> Login
+                </a>
+                <a href="/register" class="flex items-center px-4 text-white hover:text-red-500">
+                    <i class="fa-solid fa-user-plus mr-2"></i> Register
+                </a>
+            <% } %>
+        </div>
+    </div>
+</nav>
+
+<script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Desktop Account Dropdown
+    const desktopAccountBtn = document.getElementById('desktop-account-btn');
+    const desktopAccountMenu = document.getElementById('desktop-account-menu');
+
+    desktopAccountBtn.addEventListener('click', (event) => {
+        event.stopPropagation(); // Prevent closing due to outside clicks
+        desktopAccountMenu.classList.toggle('hidden');
+    });
+
+    // Close dropdowns on outside click
+    document.addEventListener('click', (event) => {
+        if (!desktopAccountBtn.contains(event.target) && !desktopAccountMenu.contains(event.target)) {
+            desktopAccountMenu.classList.add('hidden');
+        }
+    });
+</script>
